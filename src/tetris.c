@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+static int is_enter_key(int character)
+{
+    return character == '\r' || character == '\n';
+}
+
 int show_tetris_sign(void)
 {
     console_set_color("03");
@@ -30,7 +35,7 @@ int show_tetris_sign(void)
 	while (1) {
 		if (console_kbhit()) {
 			ch1 = console_getch();
-			if ((int)ch1 == 13){
+			if (is_enter_key((int)ch1)){
                 console_set_color("0F");
                 return 0;
 			}else if((int)ch1 == 27){
@@ -613,7 +618,7 @@ int show_gameover_sign(void)
 	while (1) {
 		if (console_kbhit()) {
 			ch1 = console_getch();
-			if ((int)ch1 == 13){
+			if (is_enter_key((int)ch1)){
                 console_set_color("0F");
                 return 0;
 			}else if((int)ch1 == 27){
