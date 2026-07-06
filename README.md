@@ -1,43 +1,59 @@
-# Console Tetris in C
+# Tetris (C Console Game)
 
-> Basic Programming – University of Tehran – Department of Electrical & Computer Engineering
+> Basic Programming - University of Tehran - Department of Electrical & Computer Engineering
 
-![Language](https://img.shields.io/badge/Language-C-blue) ![Tool](https://img.shields.io/badge/Tool-GCC%20%7C%20Make-orange) ![Interface](https://img.shields.io/badge/Interface-Windows%20Console%20%7C%20POSIX%20Terminal-lightgrey) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![Language](https://img.shields.io/badge/Language-C-blue) ![Tool](https://img.shields.io/badge/Tool-GCC%20%7C%20Make-orange) ![Interface](https://img.shields.io/badge/Interface-Console-lightgrey) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 ## Overview
 
-This repository contains the source code for **Console Tetris in C**, a terminal-based implementation of the Tetris game using C and keyboard-driven console input. It was developed as the *Second Project* for the *Basic Programming* course at the University of Tehran.
+This repository contains **Tetris**, a console-based implementation of the classic falling-block game, developed in C using keyboard-driven terminal input. This project was carried out as the *Second Project* for the *Basic Programming* course at the University of Tehran.
 
-The project implements a single-player falling-block game with a fixed board, keyboard controls, shape generation, horizontal movement, rotation, scoring, row deletion, next-shape preview, pause/restart/exit flow, and game-over detection. The cleaned repository separates the **console compatibility layer**, **game logic declarations**, **game implementation**, and executable entry point while preserving the original gameplay model.
+A compact recreation of the core Tetris gameplay loop, built from scratch in C with a fixed board, falling pieces, keyboard controls, row clearing, scoring, next-shape preview, pause/restart flow, and game-over detection.
 
-The original submission was Windows-console oriented. This refactored version keeps the Win32/`conio.h` path for Windows and adds a lightweight POSIX terminal layer so the code can be compiled and smoke-tested with GCC in Linux-style environments.
+![Tetris – C Console Game](files/README.png)
 
-## Project Objectives
+## Features
 
-- ✅ Implement a terminal-based Tetris-style game in C.
-- ✅ Represent the game board and active blocks using arrays.
-- ✅ Support keyboard-based movement, rotation, speed-up, pause, restart, and exit controls.
-- ✅ Detect filled rows, update the score, and remove completed rows.
-- ✅ Detect game-over state when new blocks reach the top of the board.
-- ✅ Provide a clean build system and basic logic-level verification for GitHub publication.
+* Classic falling-block gameplay: guide pieces downward, complete rows, and keep the board from reaching the top.
+* Implemented core mechanics:
+  * Four original submitted shapes: O, I, Z, and T.
+  * Horizontal movement, fast drop, and shape rotation.
+  * Row-completion detection, row deletion, and score updates.
+  * Next-shape preview and game-over detection.
+  * Pause, restart, and exit flow through keyboard commands.
+* Array-based board representation suitable for a first-year C programming project.
+* Modular C structure separating game logic, console behavior, and the main loop.
+* Lightweight smoke tests for core board and gameplay logic.
 
-## System Architecture & Modules
+## Tech Stack
 
-The project is organized into three implementation layers.
+* Language: C11
+* Interface: Windows Console / POSIX Terminal
+* Build System: Makefile
+* Compiler: GCC / MinGW GCC
+* OS Compatibility: Linux tested, Windows console branch preserved through Win32 and `conio.h`
 
-### 1️⃣ Console Compatibility Layer
+## Getting Started
 
-The `src/console.c` module abstracts terminal operations such as screen clearing, keyboard polling, single-character input, sleep timing, and console color handling. On Windows, it uses Win32/`conio.h` behavior. On POSIX terminals, it uses `termios`, `select()`, ANSI screen clearing, and `nanosleep()`.
+### 1. Clone the repository
 
-### 2️⃣ Game Logic Module
+```bash
+git clone https://github.com/mragetsars/TETRIS.git
+cd TETRIS
+```
 
-The `src/tetris.c` module contains the main gameplay logic, including board generation, tetromino creation, movement, rotation, collision checks, row-completion detection, score deletion, next-shape preview, and game-over detection.
+### 2. Build the game
 
-The implemented shape set includes the original four shapes used by the submitted project: **O**, **I**, **Z**, and **T**.
+```bash
+make clean #Clean build files
+make
+```
 
-### 3️⃣ Executable Entry Point
+### 3. Run the game
 
-The `src/main.c` file coordinates the game loop. It initializes the console, displays the start screen, updates falling blocks, handles user input, applies scoring, and manages restart or exit behavior without recursively calling `main()`.
+```bash
+./build/tetris
+```
 
 ## Controls
 
@@ -57,42 +73,30 @@ The project is organized as follows:
 
 ```text
 TETRIS/
-├── include/              # Header files and public function declarations
-│   ├── console.h         # Console abstraction interface
-│   └── tetris.h          # Game constants and gameplay function declarations
-├── src/                  # C source files
-│   ├── console.c         # Windows/POSIX console compatibility layer
-│   ├── main.c            # Executable game loop and input handling
-│   └── tetris.c          # Core Tetris board, shape, score, and render logic
-├── tests/                # Logic-level smoke tests
-│   └── test_tetris_logic.c
-├── .gitattributes        # Line-ending normalization rules
-├── .gitignore            # Ignored build, binary, editor, and OS artifacts
-├── Makefile              # Build and test commands
-└── README.md             # Project documentation
+├── files/                   # README cover and visual assets
+│   └── README.png           # README cover image
+├── include/                 # Header files (.h)
+│   ├── console.h            # Console abstraction interface
+│   └── tetris.h             # Game constants and gameplay declarations
+├── src/                     # C implementation files
+│   ├── console.c            # Windows/POSIX console compatibility layer
+│   ├── main.c               # Game entry point and input loop
+│   └── tetris.c             # Core board, shape, score, and render logic
+├── tests/                   # Logic-level smoke tests
+│   └── test_tetris_logic.c  # Basic verification for gameplay helpers
+├── .gitattributes           # Line-ending normalization rules
+├── .gitignore               # Ignored build, binary, editor, and OS artifacts
+├── Makefile                 # Build and test commands
+└── README.md                # Project documentation
 ```
-
-## Build & Run
-
-The project was verified with GCC and `make` in a Linux environment.
-
-```bash
-make clean
-make
-./build/tetris
-```
-
-On Windows, the code keeps the Win32/`conio.h` branch. A MinGW-style GCC environment is recommended for using the provided `Makefile`.
 
 ## Testing
 
-Run the logic-level smoke test with:
+Run the smoke tests with:
 
 ```bash
 make test
 ```
-
-The test checks board initialization, shape generation, board updating, basic movement, row-completion detection, and row deletion.
 
 Expected output:
 
@@ -100,13 +104,20 @@ Expected output:
 All Tetris logic smoke tests passed.
 ```
 
-## Notes
+## Future Improvements
 
-- The formal project statement was not included in the submitted ZIP, so the documented requirements are inferred from the source code, original README, and project context.
-- The project is a compact first-year programming game and intentionally does not implement the full seven-piece modern Tetris shape set.
-- Windows console colors are preserved through the Windows branch. On POSIX terminals, color commands are treated as no-ops for portability.
-- No license file is included. Add a license before distributing or reusing the code beyond portfolio publication.
+* Add the full seven-piece modern Tetris shape set.
+* Add persistent high-score storage.
+* Improve terminal colors and rendering on POSIX terminals.
+* Add automated input-driven gameplay tests.
+* Add captured gameplay screenshots from the Windows console version.
 
-## Author
+## Acknowledgments
 
-* **[Meraj Rastegar](https://github.com/mragetsars)**
+* Inspired by the classic Tetris game.
+* Built using C and terminal-based input/output.
+* By **[Meraj Rastegar](https://github.com/mragetsars)**
+
+## About
+
+a console-based implementation of the classic Tetris game, developed in C with keyboard-driven terminal input. This project was carried out as the Second Project for the Basic Programming course at the University of Tehran.
