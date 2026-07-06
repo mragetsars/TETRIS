@@ -2,13 +2,13 @@
 
 > Basic Programming - University of Tehran - Department of Electrical & Computer Engineering
 
-![Language](https://img.shields.io/badge/Language-C-blue) ![Tool](https://img.shields.io/badge/Tool-GCC%20%7C%20Make-orange) ![Interface](https://img.shields.io/badge/Interface-Console-lightgrey) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![Language](https://img.shields.io/badge/Language-C-blue) ![Tool](https://img.shields.io/badge/Tool-GCC%20%7C%20Make-orange) ![Interface](https://img.shields.io/badge/Interface-Windows%20Console%20%7C%20POSIX%20Terminal-lightgrey) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 ## Overview
 
 This repository contains **Tetris**, a console-based implementation of the classic falling-block game, developed in C using keyboard-driven terminal input. This project was carried out as the *Second Project* for the *Basic Programming* course at the University of Tehran.
 
-A compact recreation of the core Tetris gameplay loop, built from scratch in C with a fixed board, falling pieces, keyboard controls, row clearing, scoring, next-shape preview, pause/restart flow, and game-over detection.
+A compact recreation of the core Tetris gameplay loop, built from scratch in C with a fixed board, falling pieces, keyboard controls, row clearing, scoring, next-shape preview, pause/restart flow, and game-over detection. The current repository version also includes a small console-compatibility layer so the game can be built on Linux through a POSIX terminal path while preserving the original Windows console behavior.
 
 ![Tetris – C Console Game](files/README.png)
 
@@ -31,7 +31,7 @@ A compact recreation of the core Tetris gameplay loop, built from scratch in C w
 * Interface: Windows Console / POSIX Terminal
 * Build System: Makefile
 * Compiler: GCC / MinGW GCC
-* OS Compatibility: Linux tested, Windows console branch preserved through Win32 and `conio.h`
+* OS Compatibility: Linux tested and supported, Windows supported through a preserved Win32 console branch
 
 ## Getting Started
 
@@ -44,15 +44,32 @@ cd TETRIS
 
 ### 2. Build the game
 
+On Linux:
+
 ```bash
-make clean #Clean build files
+make clean
 make
+```
+
+On Windows with MinGW GCC:
+
+```bash
+mingw32-make clean
+mingw32-make
 ```
 
 ### 3. Run the game
 
+On Linux:
+
 ```bash
 ./build/tetris
+```
+
+On Windows:
+
+```bash
+.\build\tetris.exe
 ```
 
 ## Controls
@@ -110,7 +127,7 @@ All Tetris logic smoke tests passed.
 * Add persistent high-score storage.
 * Improve terminal colors and rendering on POSIX terminals.
 * Add automated input-driven gameplay tests.
-* Add captured gameplay screenshots from the Windows console version.
+* Add captured gameplay screenshots from Linux and Windows runs.
 
 ## Acknowledgments
 
