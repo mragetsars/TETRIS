@@ -8,7 +8,9 @@
 
 This repository contains **Tetris**, a console-based implementation of the classic falling-block game, developed in C using keyboard-driven terminal input. This project was carried out as the *Second Project* for the *Basic Programming* course at the University of Tehran.
 
-A compact recreation of the core Tetris gameplay loop, built from scratch in C with a fixed board, falling pieces, keyboard controls, row clearing, scoring, next-shape preview, pause/restart flow, and game-over detection. The current repository version also includes a small console-compatibility layer so the game can be built on Linux through a POSIX terminal path while preserving the original Windows console behavior.
+A compact recreation of the core Tetris gameplay loop, built from scratch in C with a fixed board, falling pieces, keyboard controls, row clearing, scoring, next-shape preview, pause/restart flow, and game-over detection.
+
+This project was also used as a small academic exercise in low-level console rendering, keyboard-driven interaction, and cross-platform terminal compatibility. The current repository version preserves the original Windows console implementation while adding a POSIX terminal path so the game can be built and played on Linux as well.
 
 ![Tetris – C Console Game](files/README.png)
 
@@ -28,10 +30,10 @@ A compact recreation of the core Tetris gameplay loop, built from scratch in C w
 ## Tech Stack
 
 * Language: C11
-* Interface: Windows Console / POSIX Terminal
+* Interface: Linux Terminal / Windows Console
 * Build System: Makefile
 * Compiler: GCC / MinGW GCC
-* OS Compatibility: Linux tested and supported, Windows supported through a preserved Win32 console branch
+* OS Compatibility: Linux (tested), Windows supported through a preserved Win32 console branch
 
 ## Getting Started
 
@@ -91,7 +93,10 @@ The project is organized as follows:
 ```text
 TETRIS/
 ├── files/                   # README cover and visual assets
-│   └── README.png           # README cover image
+│   ├── README.png           # README cover image
+│   └── screenshots/         # Linux gameplay previews for the README
+│       ├── linux-title-screen.png
+│       └── linux-gameplay-screen.png
 ├── include/                 # Header files (.h)
 │   ├── console.h            # Console abstraction interface
 │   └── tetris.h             # Game constants and gameplay declarations
@@ -106,6 +111,16 @@ TETRIS/
 ├── Makefile                 # Build and test commands
 └── README.md                # Project documentation
 ```
+
+## Screenshots
+
+Linux title screen:
+
+![Linux Title Screen](files/screenshots/linux-title-screen.png)
+
+Linux gameplay preview:
+
+![Linux Gameplay Preview](files/screenshots/linux-gameplay-screen.png)
 
 ## Testing
 
