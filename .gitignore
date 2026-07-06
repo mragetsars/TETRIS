@@ -1,0 +1,27 @@
+# Build artifacts
+build/
+*.o
+*.obj
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Debug artifacts
+*.dSYM/
+*.pdb
+*.ilk
+*.map
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
