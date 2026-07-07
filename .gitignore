@@ -1,5 +1,6 @@
 # Build artifacts
-build/
+obj/*
+!obj/.gitkeep
 *.o
 *.obj
 *.out

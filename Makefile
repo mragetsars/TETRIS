@@ -2,9 +2,16 @@ CC ?= gcc
 CFLAGS ?= -std=c11 -Wall -Wextra -Wpedantic -Iinclude
 LDFLAGS ?=
 
-BUILD_DIR := build
-TARGET := $(BUILD_DIR)/tetris
-TEST_TARGET := $(BUILD_DIR)/test_tetris_logic
+OBJ_DIR := obj
+
+ifeq ($(OS),Windows_NT)
+EXE_EXT := .exe
+else
+EXE_EXT := .out
+endif
+
+TARGET := tetris$(EXE_EXT)
+TEST_TARGET := $(OBJ_DIR)/test_tetris_logic$(EXE_EXT)
 
 SRC := src/main.c src/tetris.c src/console.c
 TEST_SRC := tests/test_tetris_logic.c src/tetris.c src/console.c
@@ -13,13 +20,13 @@ TEST_SRC := tests/test_tetris_logic.c src/tetris.c src/console.c
 
 all: $(TARGET)
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-$(TARGET): $(SRC) | $(BUILD_DIR)
+$(TARGET): $(SRC) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(SRC) -o $@ $(LDFLAGS)
 
-$(TEST_TARGET): $(TEST_SRC) | $(BUILD_DIR)
+$(TEST_TARGET): $(TEST_SRC) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(TEST_SRC) -o $@ $(LDFLAGS)
 
 run: $(TARGET)
@@ -29,4 +36,5 @@ test: $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -f $(TARGET) $(TEST_TARGET)
+	find $(OBJ_DIR) -type f ! -name '.gitkeep' -delete 2>/dev/null || true

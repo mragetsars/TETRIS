@@ -13,6 +13,7 @@ static int is_enter_key(int character)
 int show_tetris_sign(void)
 {
     console_set_color("03");
+    console_clear();
     printf("\n\n\n\n    _______________________________________________________________________________________________________________\n  ");
     printf(" |-> release in : 2023/12/19                                                                                     |\n  ");
     printf(" |                                             IN THE NAME OF GOD                                                |\n  ");
@@ -600,9 +601,8 @@ void score_delete(char game[TETRIS_SCREEN_WIDTH][TETRIS_SCREEN_HEIGHT], int scor
 
 int show_gameover_sign(void)
 {
-    console_set_color("0C");
     console_set_color("C0");
-    console_set_color("0C");
+    console_clear();
     printf("                                                                                                                 \n  ");
     printf("                                                                                                                 \n  ");
     printf("        << <<         #####   #####  ##     ##  #####        #####  #      #  #####  #####          >> >>        \n  ");

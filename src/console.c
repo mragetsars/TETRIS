@@ -40,6 +40,13 @@ void console_set_color(const char *color_code)
     system(command);
 }
 
+void console_flash_background(const char *color_code, unsigned int milliseconds)
+{
+    console_set_color(color_code);
+    console_sleep_ms(milliseconds);
+    console_set_color("0F");
+}
+
 int console_kbhit(void)
 {
     return _kbhit();
@@ -105,9 +112,55 @@ void console_sleep_ms(unsigned int milliseconds)
     nanosleep(&requested_time, NULL);
 }
 
+static int hex_digit_to_int(char digit)
+{
+    if (digit >= '0' && digit <= '9') {
+        return digit - '0';
+    }
+    if (digit >= 'A' && digit <= 'F') {
+        return digit - 'A' + 10;
+    }
+    if (digit >= 'a' && digit <= 'f') {
+        return digit - 'a' + 10;
+    }
+    return -1;
+}
+
 void console_set_color(const char *color_code)
 {
-    (void)color_code;
+    static const int foreground_codes[16] = {
+        30, 34, 32, 36, 31, 35, 33, 37,
+        90, 94, 92, 96, 91, 95, 93, 97
+    };
+    static const int background_codes[16] = {
+        40, 44, 42, 46, 41, 45, 43, 47,
+        100, 104, 102, 106, 101, 105, 103, 107
+    };
+
+    if (color_code == NULL || color_code[0] == '\0' || color_code[1] == '\0') {
+        printf("\033[0m");
+        fflush(stdout);
+        return;
+    }
+
+    const int background = hex_digit_to_int(color_code[0]);
+    const int foreground = hex_digit_to_int(color_code[1]);
+
+    if (background < 0 || foreground < 0) {
+        printf("\033[0m");
+    } else {
+        printf("\033[%d;%dm", background_codes[background], foreground_codes[foreground]);
+    }
+    fflush(stdout);
+}
+
+void console_flash_background(const char *color_code, unsigned int milliseconds)
+{
+    console_set_color(color_code);
+    console_clear();
+    console_sleep_ms(milliseconds);
+    console_set_color("0F");
+    console_clear();
 }
 
 int console_kbhit(void)

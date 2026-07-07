@@ -40,9 +40,7 @@ static int run_game(void)
 
                 while ((score_level = score_sensor(game)) != 0) {
                     print_game(game, score, next_shape);
-                    console_set_color("A0");
-                    console_sleep_ms(100);
-                    console_set_color("0F");
+                    console_flash_background("A0", 100);
                     score += TETRIS_SCORE_PER_ROW;
                     score_delete(game, score_level);
                     print_game(game, score, next_shape);
